@@ -1,0 +1,53 @@
+{% extends 'ProyectoWebApp/base_solicitudes.html' %}
+{% block title %}Solicitudes de Tolva{% endblock %}
+{% block page_title %}Solicitudes de Tolva{% endblock %}
+{% block content %}
+
+{% load static %}
+
+<div class="formulario-solicitud">
+  <h2>Crear Nueva Solicitud de Retiro</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <!-- Mensajes -->
+    {% if messages %}
+    <div class="messages mt-3">
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    <button type="submit">Enviar Solicitud de Retiro</button>
+  </form>
+</div>
+
+<div class="imagenes_solicitudes">
+  <h2>Materiales Disponibles</h2>
+  
+  <div class="item">
+      <h3>Nylon</h3>
+      <img src="{% static 'solicitudes/img/nylon.jpg' %}" alt="Nylon">
+  </div>
+
+  <div class="item">
+      <h3>Botella de Vidrio</h3>
+      <img src="{% static 'solicitudes/img/botellavidrio.webp' %}" alt="Botella de Vidrio">
+  </div>
+
+  <div class="item">
+      <h3>Botellas Compactadas</h3>
+      <img src="{% static 'solicitudes/img/botellas compactadas.jpg' %}" alt="Botellas Compactadas">
+  </div>
+
+  <div class="item">
+      <h3>Carton Compactado</h3>
+      <img src="{% static 'solicitudes/img/carton compactado.jpg' %}" alt="Carton Compactado">
+  </div>
+</div>
+
+{% endblock %}

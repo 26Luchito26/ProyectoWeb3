@@ -1,0 +1,32 @@
+{% extends 'ProyectoWebApp/base_capsulas.html' %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <br/>
+    <h2 style="font-family: 'Roboto', sans-serif; color: white; font-weight: bold; font-size: 50px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); margin-left: 200px; padding: 5px; position: relative; z-index: 10;">Cápsulas Disponibles</h2>
+    <br/>
+    <ul style="list-style: none; padding: 0;">
+        {% for capsula in capsulas %}
+        <li style="text-align: center; position: relative;">
+            <div style="max-width: 1300px; margin: auto; background-color: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 10px; margin-bottom: 20px; margin-left: 200px;">
+                <p style="font-family: 'Roboto', sans-serif; color: white; font-weight: bold; font-size: 24px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); margin: 0; padding: 5px; position: relative; z-index: 10;" >Video {{ capsula.id_capsula }}</p>
+                <p style="font-family: 'Roboto', sans-serif; color: white; font-weight: bold; font-size: 24px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); margin: 0; padding: 5px; position: relative; z-index: 10;">Nombre: {{ capsula.nombre_capsula }}</p>
+                <p style="font-family: 'Roboto', sans-serif; color: white; font-weight: bold; font-size: 24px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); margin: 0; padding: 5px; position: relative; z-index: 10;">Descripción: {{ capsula.descripcion_capsula }}</p>
+            </div>
+            {% if capsula.id_capsula == 1 %}
+            <iframe style="position: relative; z-index: 10; margin-left: 200px;" width="800" height="450" src="https://www.youtube.com/embed/_adiNK3zqiY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif capsula.id_capsula == 2 %}
+            <iframe style="position: relative; z-index: 10; margin-left: 200px;" width="800" height="450" src="https://www.youtube.com/embed/5L8N6wvDBCU?si=HRkGpC1h2lOutqw9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif capsula.id_capsula == 3 %}
+            <iframe style="position: relative; z-index: 10; margin-left: 200px;" width="800" height="450" src="https://www.youtube.com/embed/qMGd5tLVqU8?si=A7Sk_FeVenZdXy9V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif capsula.id_capsula == 4 %}
+            <iframe style="position: relative; z-index: 10; margin-left: 200px;" width="800" height="450" src="https://www.youtube.com/embed/zmJK54IR4Ts?si=BLFqfqNBfQcM4jEO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif capsula.id_capsula == 5 %}
+            <iframe style="position: relative; z-index: 10; margin-left: 200px;" width="800" height="450" src="https://www.youtube.com/embed/BYPXJm5B8FE?si=d7F74kCwQ8ilwktj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% endif %}
+        </li>
+        <br/> 
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

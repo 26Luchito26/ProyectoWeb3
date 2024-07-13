@@ -1,0 +1,668 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');
+:root {
+  --color-barra-lateral: rgb(221, 6, 13); /* Rojo Coca-Cola */
+  --color-texto: rgb(255, 255, 255); /* Negro */
+  --color-texto-menu: rgb(255, 255, 255); /* Gris */
+  --color-menu-hover: rgb(238, 238, 238); /* Gris claro */
+  --color-menu-hover-texto: rgb(0, 0, 0); /* Negro */
+  --color-boton: rgb(0, 0, 0); /* Negro */
+  --color-boton-texto: rgb(255, 255, 255); /* Blanco */
+  --color-linea: rgb(180, 180, 180); /* Gris */
+  --color-switch-base: rgb(201, 202, 206); /* Gris */
+  --color-switch-circulo: rgb(241, 241, 241); /* Blanco */
+  --color-scroll: rgb(192, 192, 192); /* Gris */
+  --color-scroll-hover: rgb(134, 134, 134); /* Gris oscuro */
+}
+
+.dark-mode {
+  --color-barra-lateral: rgb(44, 45, 49); /* Azul oscuro */
+  --color-texto: rgb(255, 255, 255); /* Blanco */
+  --color-texto-menu: rgb(255, 255, 255); /* Gris */
+  --color-menu-hover: rgb(0, 0, 0); /* Negro */
+  --color-menu-hover-texto: rgb(238, 238, 238); /* Blanco */
+  --color-boton: rgb(255, 255, 255); /* Blanco */
+  --color-boton-texto: rgb(0, 0, 0); /* Negro */
+  --color-linea: rgb(90, 90, 90); /* Gris */
+  --color-switch-base: rgb(39, 205, 64); /* Verde */
+  --color-switch-circulo: rgb(255, 255, 255); /* Blanco */
+  --color-scroll: rgb(68, 69, 74); /* Gris oscuro */
+  --color-scroll-hover: rgb(85, 85, 85); /* Gris medio */
+}
+
+/* Reset general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos del cuerpo y de la imagen de fondo */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh; /* Establece altura mínima */
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(2px); /* Puedes ajustar el valor de desenfoque según lo necesites */
+  z-index: 1;
+  transition: opacity 0.5s ease; /* Transición de opacidad para el efecto suave */
+}
+
+/* Capa semitransparente sobre la imagen de fondo */
+.capa {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(130deg, #df2b34, #fb4c4c);
+  opacity: 0.5;
+  z-index: 2;
+}
+
+/* Modo oscuro */
+.dark-mode .capa {
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(130deg, #1a1a1a, #2a2a2a);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+/*-----------------Menu*/
+.menu {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--color-boton);
+  color: var(--color-boton-texto);
+  left: 15px; /* Cambiado de right a left */
+  top: 15px;
+  z-index: 100;
+}
+
+/*----------------Barra Lateral*/
+.barra-lateral {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 350px;
+  height: 100%;
+  overflow: hidden;
+  padding: 20px 15px;
+  background-color: var(--color-barra-lateral);
+  transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+  z-index: 3;
+  left: 0; /* Asegura que la barra lateral esté a la izquierda */
+  top: 0px;
+}
+
+.mini-barra-lateral {
+  width: 80px;
+}
+
+.barra-lateral span {
+  width: 100px;
+  white-space: nowrap;
+  font-size: 18px;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.5s ease, width 0.5s ease;
+}
+
+.barra-lateral span.oculto {
+  opacity: 0;
+  width: 0;
+}
+
+/*------------> Nombre de la página */
+.barra-lateral .nombre-pagina {
+  width: 100%;
+  height: 45px;
+  color: var(--color-texto);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.barra-lateral .nombre-pagina ion-icon {
+  min-width: 50px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.barra-lateral .nombre-pagina span {
+  margin-left: 5px;
+  font-size: 25px;
+}
+
+/*------------> Botón*/
+.barra-lateral .boton {
+  width: 100%;
+  height: 45px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-boton);
+  color: var(--color-boton-texto);
+}
+
+.barra-lateral .boton ion-icon {
+  min-width: 50px;
+  font-size: 25px;
+}
+
+
+.barra-lateral .navegacion::-webkit-scrollbar {
+  width: 5px;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar-thumb {
+  background-color: var(--color-scroll);
+  border-radius: 5px;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-scroll-hover);
+}
+
+.barra-lateral .navegacion li {
+  list-style: none;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.barra-lateral .navegacion a {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 10px;
+  color: var(--color-texto-menu);
+}
+
+.barra-lateral .navegacion a:hover {
+  background-color: var(--color-menu-hover);
+  color: var(--color-menu-hover-texto);
+}
+
+.barra-lateral .navegacion ion-icon {
+  min-width: 50px;
+  font-size: 20px;
+}
+
+/*-----------------> Linea*/
+.barra-lateral .linea {
+  width: 100%;
+  height: 1px;
+  margin-top: 15px;
+  background-color: var(--color-linea);
+}
+
+.barra-lateral .modo-oscuro {
+  width: 100%;
+  margin-bottom: 80px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px; /* Agrega padding para evitar que el contenido se toque entre sí */
+}
+
+.barra-lateral .modo-oscuro .info {
+  display: flex;
+  align-items: center;
+  color: var(--color-texto-menu);
+  width: 70%; /* Ajusta el ancho para permitir que el texto sea visible */
+}
+
+.barra-lateral .modo-oscuro .info ion-icon {
+  width: 20px; /* Ajusta el tamaño del icono */
+  font-size: 20px;
+  margin-right: 5px; /* Agrega espacio entre el icono y el texto */
+}
+
+.barra-lateral .modo-oscuro .info span {
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
+}
+
+.barra-lateral .modo-oscuro .switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  height: 45px;
+  cursor: pointer;
+  width: 30%; /* Ajusta el ancho para permitir espacio para el texto */
+}
+
+.barra-lateral .modo-oscuro .base {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 35px;
+  height: 20px;
+  background-color: var(--color-switch-base);
+  border-radius: 50px;
+}
+
+.barra-lateral .modo-oscuro .circulo {
+  position: absolute;
+  width: 18px;
+  height: 90%;
+  background-color: var(--color-switch-circulo);
+  border-radius: 50%;
+  left: 2px;
+  transition: left 0.5s ease;
+}
+
+.barra-lateral .modo-oscuro .circulo.prendido {
+  left: 15px;
+}
+
+/*---------------> Usuario*/
+.barra-lateral .usuario {
+  width: 100%;
+  display: flex;
+}
+
+.barra-lateral .usuario img {
+  width: 50px;
+  min-width: 50px;
+  border-radius: 10px;
+}
+
+.barra-lateral .usuario .info-usuario {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-texto);
+  overflow: hidden;
+}
+
+.barra-lateral .usuario .nombre-email {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.barra-lateral .usuario .nombre {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.barra-lateral .usuario .email {
+  font-size: 13px;
+}
+
+.barra-lateral .usuario ion-icon {
+  font-size: 20px;
+}
+/*-------------main*/
+
+#inbox {
+  background-color: var(--color-menu-hover);
+  color: var(--color-menu-hover-texto);
+}
+
+main {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.5s ease;
+  position: relative;
+}
+
+main.min-main {
+  margin-left: 80px;
+}
+
+/* Estilo del botón de colapso */
+#btn-collapse {
+  position: absolute;
+  top: 10px;
+  right: -40px;
+  background-color: #b40012; /* Color rojo de la barra lateral */
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
+/* Estilos del logo de la empresa */
+.logo-empresa {
+  position: fixed; 
+  top: 10px; 
+  right: 50px; 
+  width: 10%; 
+  height: auto; 
+  z-index: 4; /* Ajustado para estar sobre la barra lateral */
+}
+
+.noticias h2 {
+  font-size: 28px; /* Tamaño de fuente del título */
+  color: #333; /* Color del texto */
+  margin-bottom: 20px; /* Espaciado inferior */
+}
+
+.noticias .card {
+  height: 100%; /* Altura de la tarjeta */
+  display: flex;
+  flex-direction: column;
+  border: none; /* Quita el borde de la tarjeta */
+  box-shadow: none; /* Quita la sombra de la tarjeta */
+}
+
+.noticias .card-body {
+  flex: 1; /* Para que el cuerpo de la tarjeta ocupe todo el espacio restante */
+  background-color: #fff; /* Color de fondo del cuerpo de la tarjeta */
+  padding: 10px; /* Espaciado interno del cuerpo de la tarjeta */
+}
+
+.noticias .card-title {
+  font-size: 18px; /* Tamaño de fuente del título de la tarjeta */
+  color: #333; /* Color del texto del título */
+  margin-bottom: 10px; /* Espaciado inferior del título */
+}
+
+.noticias .card-text {
+  font-size: 14px; /* Tamaño de fuente del texto de la tarjeta */
+  color: #666; /* Color del texto */
+}
+
+.noticias .btn-primary {
+  margin-top: auto; /* Para que el botón se alinee al final */
+}
+
+
+/* Estilos para modo oscuro */
+.dark-mode .noticias {
+  background-color: #121212; /* Color de fondo oscuro */
+  color: white; /* Color de texto para modo oscuro */
+}
+
+.dark-mode .noticias h2 {
+  color: #ddd; /* Color de texto para título en modo oscuro */
+}
+
+.dark-mode .noticias .card-body {
+  background-color: #1f1f1f; /* Color de fondo del cuerpo de la tarjeta en modo oscuro */
+}
+
+.dark-mode .noticias .card-title {
+  color: #ddd; /* Color de texto del título de la tarjeta en modo oscuro */
+}
+
+.dark-mode .noticias .card-text {
+  color: #bbb; /* Color de texto para el texto de la tarjeta en modo oscuro */
+}
+
+.dark-mode .noticias .btn-primary {
+  background-color: #007bff; /* Color de fondo del botón primario en modo oscuro */
+  color: white; /* Color de texto del botón primario en modo oscuro */
+}
+
+.dark-mode .noticias .btn-primary:hover {
+  background-color: #0056b3; /* Color de fondo del botón primario al pasar el mouse en modo oscuro */
+}
+
+
+
+
+.whatsapp-container {
+  position: relative; /* Ajusta la posición según sea necesario */
+  bottom: 20px; /* Ajusta la distancia desde el borde inferior */
+  right: 20px; /* Ajusta la distancia desde el borde derecho */
+  z-index: 3; /* Asegura que esté por encima de otros elementos, como la barra lateral */
+}
+
+
+/* Estilos de las secciones personalizadas (imágenes y noticias) */
+.custom-section {
+display: flex;
+  width: 800px;
+  height: 430px;
+  position: relative;
+  top: 50px; 
+  left: 600px;
+  z-index: 3; 
+}
+
+.custom-section img {
+  width: 150px;
+  flex-grow: 1;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.custom-section img:hover {
+  cursor: crosshair;
+  width: 300px;
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+
+/* Estilos de las noticias */
+.noticias {
+  width: 1000px; /* Ancho deseado */
+  height: 580px; /* Altura deseada */
+  position: relative;
+  top: 20px; /* Ajuste de la posición */
+  left: 600px;
+  transform: translateX(-50%);
+  z-index: 3;
+  background-color: #f8f9fa; /* Color de fondo opcional */
+  padding: 20px; /* Espaciado interno */
+  border: 1px solid #ced4da; /* Borde opcional */
+  border-radius: 5px; /* Borde redondeado */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra opcional */
+  overflow: hidden; /* Oculta el contenido que se desborde */
+  padding-bottom: 200px; /* Ajuste para espacio adicional */
+  margin-top: 200px; /* Margen inferior para separar del footer */
+  margin-bottom: 200px; /* Margen inferior para separar del footer */
+}
+
+
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+  margin-top: -40px;
+  
+}
+
+
+/* Estilos para el contenedor de logos */
+#bubblesContainer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2; /* Asegura que esté por encima de otros elementos */
+}
+
+/* Estilos para cada logo */
+.logo1, .logo2 {
+  position: absolute;
+  pointer-events: auto; /* Permite hacer clic a través de los logos */
+  background-size: contain;
+}
+
+.logo1 {
+  width: 120px; /* Tamaño del logo 1 */
+  height: 120px; /* Tamaño del logo 1 */
+  background-image: url('/static/ProyectoWebApp/img/pelotac.png'); /* Imagen del logo 1 */
+  transform: rotate(40deg); /* Rotación inicial */
+}
+
+.logo2 {
+  width: 140px; /* Tamaño del logo 2 */
+  height: 140px; /* Tamaño del logo 2 */
+  background-image: url('/static/ProyectoWebApp/img/pelotar.png'); /* Imagen del logo 2 */
+  transform: rotate(-20deg); /* Rotación inicial */
+}
+
+/* Animación de los logos */
+@keyframes logoAnimation {
+  0% {
+    transform: translateY(110%) rotate(40deg); /* Inicia desde abajo con rotación */
+  }
+  90% {
+    transform: translateY(-10%) rotate(40deg); /* Termina antes de llegar a la parte superior */
+    opacity: 1; /* Mantiene la opacidad antes de desvanecerse */
+  }
+  100% {
+    transform: translateY(-20%) rotate(40deg); /* Desplaza un poco más hacia arriba para desaparecer */
+    opacity: 0; /* Desvanece el logo al final */
+  }
+}
+/*------------------> Responsive*/
+@media (max-height: 660px) {
+  .barra-lateral .nombre-pagina {
+      margin-bottom: 5px;
+  }
+
+  .barra-lateral .modo-oscuro {
+      margin-bottom: 3px;
+  }
+}
+
+@media (max-width: 600px) {
+  .barra-lateral {
+      position: fixed;
+      left: -250px;
+  }
+
+  .max-barra-lateral {
+      left: 0;
+  }
+
+  .menu {
+      display: flex;
+  }
+
+  .menu ion-icon:nth-child(2) {
+      display: none;
+  }
+
+  main {
+      margin-left: 0;
+  }
+
+  main.min-main {
+      margin-left: 0;
+  }
+}
+
+/* Estilos para la sección del CMR */
+.cmr-section {
+  padding: 100px 0px; /* Ajusta el padding superior e inferior */
+  color: white; /* Texto negro */
+  background-color: rgba(0, 0, 0, 0.4);
+  margin: 200px 300px 100px 400px;
+  z-index: 2; /* Ajusta el valor según sea necesario, asegurándote de que sea mayor que otros elementos */
+  position: relative;
+  border-radius: 50px 5px;
+}
+
+.cmr-section h2 {
+  font-size: 36px; /* Tamaño grande del encabezado */
+  text-align: center; /* Alineación centrada */
+  margin-bottom: 40px; /* Margen inferior */
+}
+
+.cmr-section p {
+  font-size: 18px; /* Tamaño del texto */
+  line-height: 1.8; /* Espaciado de línea */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+.cmr-section ul {
+  margin-bottom: 20px; /* Margen inferior para la lista */
+}
+
+.cmr-section ul li {
+  margin-bottom: 10px; /* Margen inferior para los elementos de la lista */
+}
+
+.cmr-section img {
+  border-radius: 10px; /* Borde redondeado para la imagen */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  margin-bottom: 20px; /* Margen inferior */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto de transición */
+}
+
+
+.cmr-section img:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra más pronunciada al pasar el ratón */
+}
+
+.modal-backdrop {
+  z-index: 1040; /* Asegúrate de que el z-index sea menor que el del modal pero mayor que el del contenido detrás */
+}
+
+/* Estilos para el iframe y el título h1 */
+.mi-iframe {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin: 20px;
+  z-index: 4; /* Ajustado para que el iframe no esté por encima del h1 */
+  position: relative;
+  width: 100%; /* Ajustar el ancho del iframe al 100% del contenedor */
+}
+
+.mi-iframe-container {
+  position: relative;
+  padding-bottom: 56.25%; /* Proporción 16:9 para el contenedor */
+  height: 0;
+  overflow: hidden;
+}
+
+.mi-iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Quita el borde del iframe si lo necesitas */
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 24px; /* Tamaño de fuente del título */
+  color: #ffffff; /* Color del texto del título */
+  margin-bottom: 50px; /* Espaciado inferior del título */
+  z-index: 4;
+  position: relative;
+  text-shadow: 2px 2px 2px  black;
+}

@@ -1,0 +1,16 @@
+{% extends 'ProyectoWebApp/base_solicitudes.html' %}
+{% block title %}Exportar Solicitudes{% endblock %}
+{% block page_title %}Exportar Solicitudes a CSV{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Exportar Solicitudes a CSV</h2>
+            <p>Exporta las solicitudes de retiro, EPPs y material en formato CSV:</p>
+            <form action="{% url 'exportar_solicitudes_csv' %}" method="get">
+                <button type="submit" class="btn btn-primary">Exportar a CSV</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

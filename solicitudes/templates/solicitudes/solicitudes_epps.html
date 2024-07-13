@@ -1,0 +1,53 @@
+{% extends 'ProyectoWebApp/base_solicitudes.html' %}
+{% block title %}Solicitudes de Epps{% endblock %}
+{% block page_title %}Solicitudes de Epps{% endblock %}
+{% block content %}
+
+{% load static %}
+
+<div class="formulario-solicitud">
+  <h2>Crear Nueva Solicitud de Epps</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <!-- Mensajes -->
+    {% if messages %}
+    <div class="messages mt-3" style="position: relative; z-index: 4;">
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    <button type="submit">Enviar Solicitud de Epps</button>
+  </form>
+</div>
+
+<div class="imagenes_solicitudes">
+  <h2>Epps Disponibles</h2>
+  
+  <div class="item">
+      <h3>Casco de Seguridad</h3>
+      <img src="{% static 'solicitudes/img/casco.jpg' %}" alt="Casco de Seguridad">
+  </div>
+
+  <div class="item">
+      <h3>Lentes de Seguridad</h3>
+      <img src="{% static 'solicitudes/img/lentes.webp' %}" alt="Lentes de Seguridad">
+  </div>
+
+  <div class="item">
+      <h3>Guantes de Seguridad</h3>
+      <img src="{% static 'solicitudes/img/guantes.jpg' %}" alt="Guantes de Seguridad">
+  </div>
+
+  <div class="item">
+      <h3>Chaleco Reflectante</h3>
+      <img src="{% static 'solicitudes/img/chaleco reflectante.jpg' %}" alt="Chaleco Reflectante">
+  </div>
+</div>
+
+{% endblock %}

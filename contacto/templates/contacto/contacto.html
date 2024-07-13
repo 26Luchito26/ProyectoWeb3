@@ -1,0 +1,49 @@
+{% extends 'ProyectoWebApp/base_contacto.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    /* Estilos personalizados si es necesario */
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="contenedorFormulario container mt-5">
+    {% if "valido" in request.GET %}
+        <div class="alert alert-success" role="alert">
+            Información enviada correctamente.
+        </div>
+    {% endif %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Formulario de Contacto</h2>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ miFormulario.as_p }}
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary custom-btn">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block barra_lateral %}
+<div class="barra-lateral">
+    <ul>
+        <li class="grupo2"><a href="{% url 'Index' %}" class="nav-link">VOLVER AL INICIO</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

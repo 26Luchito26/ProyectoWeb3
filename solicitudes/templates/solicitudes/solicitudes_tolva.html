@@ -1,0 +1,53 @@
+{% extends 'ProyectoWebApp/base_solicitudes.html' %}
+{% block title %}Solicitudes de Tolva{% endblock %}
+{% block page_title %}Solicitudes de Tolva{% endblock %}
+{% block content %}
+
+{% load static %}
+
+<div class="formulario-solicitud">
+  <h2>Crear Nueva Solicitud de Tolva</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <!-- Mensajes -->
+    {% if messages %}
+    <div class="messages mt-3">
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    <button type="submit">Enviar Solicitud de Tolva</button>
+  </form>
+</div>
+
+<div class="imagenes_solicitudes">
+  <h2>Referencial Tolva</h2>
+  
+  <div class="item">
+      <h3>Tolva Abierta</h3>
+      <img src="{% static 'solicitudes/img/tolva1.jpg' %}" alt="Nylon">
+  </div>
+
+  <div class="item">
+      <h3>Tolva Pequeña</h3>
+      <img src="{% static 'solicitudes/img/tolva2.jpg' %}" alt="Botella de Vidrio">
+  </div>
+
+  <div class="item">
+      <h3>Tolva Mediana</h3>
+      <img src="{% static 'solicitudes/img/tolva3.jpg' %}" alt="Botellas Compactadas">
+  </div>
+
+  <div class="item">
+      <h3>Tolva Grande</h3>
+      <img src="{% static 'solicitudes/img/tolva4.jpg' %}" alt="Carton Compactado">
+  </div>
+</div>
+
+{% endblock %}

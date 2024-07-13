@@ -1,0 +1,75 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Registrate{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'ProyectoWebApp/css/registro.css' %}"> <!-- Estilos personalizados -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap 5.1.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> <!-- Bootstrap 4.3.1 (fallback) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <title>Registro</title>
+  
+
+</head>
+<body>
+
+  
+
+  <div id="bubblesContainer"></div>
+
+  <div class="contenedor_principal">
+    <div class="contenido_principal">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+ 
+
+  <div class="capa"></div>
+  <div class="background-image"></div>
+  
+
+
+
+  <script>
+    $(document).ready(function() {
+      var backgrounds = [
+        "{% static 'ProyectoWebApp/img/coca1.jpg' %}",
+        "{% static 'ProyectoWebApp/img/coca2.jpg' %}",
+        "{% static 'ProyectoWebApp/img/coca3.jpg' %}"
+      ];
+      var currentIndex = 0;
+    
+      // Función para establecer la primera imagen de fondo al cargar la página
+      function setInitialBackground() {
+        $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
+      }
+    
+      // Llamar a la función para establecer la primera imagen de fondo inmediatamente
+      setInitialBackground();
+    
+      // Función para cambiar la imagen de fondo automáticamente
+      function changeBackground() {
+        currentIndex = (currentIndex + 1) % backgrounds.length;
+        $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
+      }
+    
+      // Cambiar imagen cada 10 segundos
+      setInterval(changeBackground, 10000); // 10000 milisegundos = 10 segundos
+    });
+    
+  </script>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="{% static 'ProyectoWebApp/js/modo_oscuro.js' %}"></script>
+  <script src="{% static 'ProyectoWebApp/js/animacion_objetos.js' %}"></script>
+
+</body>
+</html>

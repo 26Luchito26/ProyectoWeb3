@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'ProyectoWebApp/css/contacto.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <div class="background-image"></div>
+
+  <div id="bubblesContainer"></div>
+
+
+  <div class="logo-empresa">
+    <img src="{% static 'ProyectoWebApp/img/logo.png' %}" alt="Logo de la empresa" width="200px" height="180px">
+  </div>
+
+  <div class="capa"></div>
+
+
+  <div class="contenedor_principal">
+    <div class="contenido_principal">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+
+  <div class="menu">
+    <ion-icon name="menu-outline"></ion-icon>
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  
+
+  <div class="barra-lateral">
+    <div>
+        <div class="nombre-pagina">
+            <img src="{% static 'ProyectoWebApp/img/logo.png' %}" alt="Logo de la empresa" width="90px" height="80px">
+            <span>Coca-Cola <br>Andina</span>
+        </div>
+        
+        <nav class="navegacion">
+          <ul>
+              <li>
+                  <a id="inbox" href="{% url 'Index' %}">
+                      <ion-icon name="home-outline"></ion-icon>
+                      <span>Volver al Inicio</span>
+                  </a>
+              </li>
+  
+          </ul>
+    </div>
+
+    <div>
+        <div class="linea"></div>
+
+        <div class="modo-oscuro">
+            <div class="info">
+                <ion-icon name="moon-outline"></ion-icon>
+                <span>Modo Oscuro</span>
+            </div>
+            <div class="switch">
+                <div class="base">
+                    <div class="circulo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="contenedor-footer">
+      <footer>
+          <div class="informacion-contacto">
+              <p>Coca Cola Andina Planta Punta Arenas</p>
+              <p>Teléfono: (61) 220 4107</p>
+              <p>Dirección: José Ignacio Zenteno 730, 6200000, Punta Arenas, Magallanes y la Antártica Chilena</p>
+              <p>© Todos los derechos reservados a Ignacio Ulloa, Monserratt Vargas y Luis Huanel - INACAP 2024</p>
+          </div>
+      </footer>
+  </div>
+  </div>
+
+<script>
+  $(document).ready(function() {
+    var backgrounds = [
+      "{% static 'ProyectoWebApp/img/coca1.jpg' %}",
+      "{% static 'ProyectoWebApp/img/coca2.jpg' %}",
+      "{% static 'ProyectoWebApp/img/coca3.jpg' %}"
+    ];
+    var currentIndex = 0;
+  
+    // Función para establecer la primera imagen de fondo al cargar la página
+    function setInitialBackground() {
+      $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
+    }
+  
+    // Llamar a la función para establecer la primera imagen de fondo inmediatamente
+    setInitialBackground();
+  
+    // Función para cambiar la imagen de fondo automáticamente
+    function changeBackground() {
+      currentIndex = (currentIndex + 1) % backgrounds.length;
+      $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
+    }
+  
+    // Cambiar imagen cada 10 segundos
+    setInterval(changeBackground, 10000); // 10000 milisegundos = 10 segundos
+  });
+  
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="{% static 'ProyectoWebApp/js/modo_oscuro.js' %}"></script>
+<script src="{% static 'ProyectoWebApp/js/animacion_objetos.js' %}"></script>
+</body>
+</html>

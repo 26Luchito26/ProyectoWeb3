@@ -1,0 +1,321 @@
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coca Cola Andina</title>
+  <link rel="stylesheet" href="{% static 'ProyectoWebApp/css/inicio.css' %}">
+  <link rel="stylesheet" href="{% static 'ProyectoWebApp/css/whatsapp.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <!-- Div para la imagen de fondo -->
+  <div class="background-image"></div>
+
+  <div class="capa"></div>
+
+  <!-- ENLACE DE WHATSAPP -->
+  <div class="whatsapp-container">
+    <a href="https://wa.me/56945345773?text=Hola,%20estoy%20tratando%20de%20contactarte.%20¿Podemos%20hablar%3F" target="_blank" class="whatsapp">
+      <img src="{% static 'ProyectoWebApp/img/whatsapp.png' %}" alt="whatsapp" width="130px"/>
+    </a>
+    <span class="whatsapp-text">¡Contáctanos por WhatsApp!</span>
+  </div>
+
+  <div id="bubblesContainer"></div>
+
+  <section class="custom-section">
+    <img src="{% static 'ProyectoWebApp/img/sec_1.jpg' %}">
+    <img src="{% static 'ProyectoWebApp/img/sec_2.jpg' %}">
+    <img src="{% static 'ProyectoWebApp/img/sec_3.jpg' %}">
+    <img src="{% static 'ProyectoWebApp/img/sec_4.jpg' %}">
+  </section>
+
+  <div class="logo-empresa">
+    <img src="{% static 'ProyectoWebApp/img/logo.png' %}" alt="Logo de la empresa" width="200px" height="180px">
+  </div>
+
+
+  <div class="menu">
+    <ion-icon name="menu-outline"></ion-icon>
+    <ion-icon name="close-outline"></ion-icon>
+</div>
+
+  <div class="barra-lateral">
+    <div>
+        <div class="nombre-pagina">
+            <img src="{% static 'ProyectoWebApp/img/logo.png' %}" alt="Logo de la empresa" width="90px" height="80px">
+            <span>Coca-Cola <br>Andina</span>
+        </div>
+        <a href="{% url 'Index' %}">
+          <button class="boton">
+              <ion-icon name="home-outline"></ion-icon>
+              <span>Inicio</span>
+          </button>
+      </a>
+    </div>
+
+    <nav class="navegacion">
+      <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          {% if user.tipo_usuario == "Trabajador" %}
+            <img src="{% static 'ProyectoWebApp/img/trabajador.png' %}" alt="Foto Trabajador" class="user-photo" width="50px" height="50px">
+          {% elif user.tipo_usuario == "Jefe" %}
+            <img src="{% static 'ProyectoWebApp/img/jefe.png' %}" alt="Foto Jefe" class="user-photo" width="50px" height="50px">
+          {% elif user.tipo_usuario == "Administrador" %}
+            <img src="{% static 'ProyectoWebApp/img/administrador.png' %}" alt="Foto Administrador" class="user-photo" width="50px" height="50px">
+          {% endif %}
+          <span class="nav-link user-greeting" style="color: white;">Hola {{ user.username }}</span>
+        </li>
+        
+        <li class="nav-item">
+          <a id="inbox" class="nav-link" href="{% url 'cerrar_sesion' %}" >
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <span>Cerrar Sesión</span>
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a id="inbox" class="nav-link" href="{% url 'logear' %}">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <span>Iniciar sesión</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Autenticacion' %}">
+            <ion-icon name="person-add-outline"></ion-icon>
+            <span>Registrarse</span>
+          </a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Solicitudes_Epps' %}">
+            <ion-icon name="clipboard-outline"></ion-icon>
+            <span>Solicitud de Epps</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Solicitudes_Tolva' %}">
+            <ion-icon name="clipboard-outline"></ion-icon>
+            <span>Solicitud de Tolva</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Solicitudes_Retiro' %}">
+            <ion-icon name="clipboard-outline"></ion-icon>
+            <span>Solicitud de Retiro</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'exportar_solicitudes_excel' %}">
+            <ion-icon name="arrow-redo-outline"></ion-icon>
+            <span>Exportar Solicitudes a Excel</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'capsulas' %}">
+            <ion-icon name="videocam-outline"></ion-icon>
+            <span>Cápsulas Interactivas</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Contacto' %}">
+            <ion-icon name="mail-outline"></ion-icon>
+            <span>Contacto</span>
+          </a>
+        </li>
+        <li class="nav-item ml">
+          <a class="nav-link" data-bs-toggle="modal" data-bs-target="#terminosModal" style="cursor: pointer;">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span>Términos y Condiciones</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Enlace para abrir el modal -->
+
+    <div>
+        <div class="linea"></div>
+
+        <div class="modo-oscuro">
+            <div class="info">
+                <ion-icon name="moon-outline"></ion-icon>
+                <span>Modo Oscuro</span>
+            </div>
+            <div class="switch">
+                <div class="base">
+                    <div class="circulo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="contenedor-footer">
+        <footer>
+            <div class="informacion-contacto">
+                <p>Coca Cola Andina Planta Punta Arenas</p>
+                <p>Teléfono: (61) 220 4107</p>
+                <p>Dirección: José Ignacio Zenteno 730, 6200000, Punta Arenas, Magallanes y la Antártica Chilena</p>
+                <p>© Todos los derechos reservados a Ignacio Ulloa, Monserratt Vargas y Luis Huanel - INACAP 2024</p>
+            </div>
+        </footer>
+    </div>
+
+</div>
+
+  <section class="cmr-section">
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Centro de Manejo de Residuos (CMR) de Coca-Cola Andina</h2>
+      
+      <div class="row">
+        <div class="col-lg-6">
+          <img src="{% static 'ProyectoWebApp/img/cmr.jpg' %}" class="img-fluid rounded" alt="Centro de Manejo de Residuos">
+        </div>
+        <div class="col-lg-6">
+          <p>El Centro de Manejo de Residuos (CMR) de Coca-Cola Andina es una instalación crucial en su estrategia de sostenibilidad y responsabilidad ambiental. Está diseñado para gestionar de manera eficiente los residuos generados durante la producción y distribución de sus productos, promoviendo prácticas de economía circular y minimizando el impacto ambiental.</p>
+          
+          <p>Ubicado estratégicamente en diversas plantas y centros de distribución de Coca-Cola Andina, el CMR se enfoca en:</p>
+          
+          <ul>
+            <li><strong>Gestión Integral de Residuos:</strong> Implementa procesos avanzados de segregación, reciclaje y reutilización de materiales para reducir al mínimo la generación de residuos enviados a vertederos.</li>
+            <li><strong>Educación y Sensibilización:</strong> Desarrolla programas educativos para empleados y comunidades locales sobre la importancia del manejo responsable de los residuos y la conservación del medio ambiente.</li>
+            <li><strong>Colaboración Estratégica:</strong> Trabaja en colaboración con autoridades locales, organizaciones ambientales y la comunidad para promover iniciativas sostenibles y mejorar continuamente sus prácticas.</li>
+            <li><strong>Innovación Continua:</strong> Investiga nuevas tecnologías y métodos para optimizar la eficiencia operativa del CMR y expandir su capacidad de recuperación de recursos.</li>
+          </ul>
+          
+          <p>El compromiso de Coca-Cola Andina con el CMR forma parte de su compromiso global para abordar los desafíos ambientales y contribuir a un futuro más sostenible. A través de estas iniciativas, la empresa no solo busca cumplir con las regulaciones ambientales, sino también liderar en prácticas de gestión de residuos que inspiren a otras organizaciones a seguir su ejemplo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mt-5">
+    <section class="noticias">
+      <h2 class="text-center mb-4">El impacto de Resiter y Coca Cola Andina</h2>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card shadow-sm">
+            <img src="{% static 'ProyectoWebApp/img/resiter2.jpg' %}" class="card-img-top" alt="Noticia 1">
+            <div class="card-body">
+              <h5 class="card-title">09/03/2021. Coca-Cola afirma que avanzará con el proyecto para crear planta “bottle to bottle” tras fin de acuerdo con CCU</h5>
+              <p class="card-text">Esto luego que CCU, Embotelladora Andina y Embonor informaran a la Comisión para el Mercado Financiero (CMF) que no continuarán con proyecto para explotación conjunta de una planta de similares características.</p>
+              <a href="https://www.paiscircular.cl/consumo-y-produccion/coca-cola-afirma-que-avanzara-con-el-proyecto-para-crear-planta-bottle-to-bottle/" class="btn btn-primary stretched-link">Leer más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card shadow-sm">
+            <img src="{% static 'ProyectoWebApp/img/ima.png' %}" class="card-img-top" alt="Noticia 2">
+            <div class="card-body">
+              <h5 class="card-title">26/11/2021. RESITER SE ADJUDICA IMPORTANTE CONTRATO EN EMBOTELLADORA ANDINA</h5>
+              <p class="card-text">Desde ahora Resiter será el responsable del resultado Zero Waste de la planta Renca de Embotelladora Andina.</p>
+              <a href="https://www.resiter.com/2021/11/resiter-se-adjudica-importante-contrato-en-embotelladora-andina/" class="btn btn-primary stretched-link">Leer más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card shadow-sm">
+            <img src="{% static 'ProyectoWebApp/img/a.jpg' %}" class="card-img-top" alt="Noticia 3">
+            <div class="card-body">
+              <h5 class="card-title">23/04/2019. El Pacto Chileno de los Plásticos ya es una Realidad</h5>
+              <p class="card-text">Unilever, Amcor, Coca Cola, Mall Plaza, Nestlé, Soprole y Resiter suscribieron, en calidad de socios fundadores del mundo privado, el Pacto por los Plásticos Chile, enmarcado en un esfuerzo global promovido por la Fundación Ellen MacArthur para evitar que estos elementos impacten al medio ambiente.</p>
+              <a href="https://fch.cl/news-2/el-pacto-chileno-de-los-plasticos-ya-es-una-realidad-2/" class="btn btn-primary stretched-link">Leer más</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <h1>Mapa de Coca-Cola Andina en Punta Arenas</h1>
+
+    <iframe src="https://www.openstreetmap.cl/#18/-53.15497/-70.91790" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" class="mi-iframe"></iframe>
+
+
+
+ <!-- Modal para los términos y condiciones -->
+<div class="modal fade" id="terminosModal" tabindex="-1" aria-labelledby="terminosModalLabel" aria-hidden="true" style="z-index: 1050;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="terminosModalLabel">Términos y Condiciones - Centro de Manejo de Residuos (CMR)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+          <h4>1. Introducción</h4>
+          <p>Estos términos y condiciones regulan el uso y acceso al sitio web del Centro de Manejo de Residuos (CMR) de Coca-Cola Andina en Punta Arenas.</p>
+          
+          <h4>2. Uso Responsable del Sitio Web</h4>
+          <p>Los usuarios del sitio web del CMR deben comprometerse a utilizarlo de manera responsable, respetando las normativas internas de Coca-Cola Andina Punta Arenas.</p>
+          
+          <h4>3. Gestión de Residuos</h4>
+          <p>El CMR se dedica a la gestión integral de residuos, promoviendo prácticas de economía circular y minimización del impacto ambiental a través de su sitio web. Los usuarios deben participar activamente en estos esfuerzos.</p>
+          
+          <h4>4. Educación y Sensibilización</h4>
+          <p>El compromiso del CMR incluye programas educativos sobre el manejo responsable de residuos y la conservación ambiental dirigidos a empleados y comunidades locales, facilitados a través del sitio web.</p>
+          
+          <h4>5. Colaboración Estratégica</h4>
+          <p>El CMR colabora con autoridades locales, organizaciones ambientales y la comunidad a través de su sitio web, promoviendo iniciativas sostenibles y mejorando continuamente sus prácticas.</p>
+          
+          <h4>6. Innovación Continua</h4>
+          <p>Se fomenta la investigación y la adopción de nuevas tecnologías a través del sitio web para optimizar la eficiencia operativa del CMR y expandir su capacidad de recuperación de recursos.</p>
+          
+          <h4>7. Derechos de Propiedad Intelectual</h4>
+          <p>Todo el contenido y materiales proporcionados en el sitio web del CMR son propiedad exclusiva de Coca-Cola Andina, a menos que se especifique lo contrario.</p>
+          
+          <h4>8. Ley Aplicable</h4>
+          <p>Estos términos y condiciones se rigen por las leyes vigentes de la República de Chile en relación con el uso del sitio web del CMR de Coca-Cola Andina en Punta Arenas.</p>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  var backgrounds = [
+    "{% static 'ProyectoWebApp/img/coca1.jpg' %}",
+    "{% static 'ProyectoWebApp/img/coca2.jpg' %}",
+    "{% static 'ProyectoWebApp/img/coca3.jpg' %}"
+  ];
+  var currentIndex = 0;
+
+  // Función para establecer la primera imagen de fondo al cargar la página
+  function setInitialBackground() {
+    $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
+  }
+
+  // Llamar a la función para establecer la primera imagen de fondo inmediatamente
+  setInitialBackground();
+
+  // Función para cambiar la imagen de fondo automáticamente
+  function changeBackground() {
+    currentIndex = (currentIndex + 1) % backgrounds.length;
+    $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
+  }
+
+  // Cambiar imagen cada 10 segundos
+  setInterval(changeBackground, 10000); // 10000 milisegundos = 10 segundos
+});
+
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="{% static 'ProyectoWebApp/js/modo_oscuro.js' %}"></script>
+<script src="{% static 'ProyectoWebApp/js/animacion_objetos.js' %}"></script>
+
+<!-- JavaScript de Bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js" integrity="sha384-U5l6FJxBV7NpfCrv1WBmpQVZbIZHzoI5/9r2E+NkSc4+qjQ6PLHYM0dI2S45fdW3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
