@@ -60,83 +60,119 @@
 
     <nav class="navegacion">
       <ul class="navbar-nav mr-auto">
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          {% if user.tipo_usuario == "Trabajador" %}
-            <img src="{% static 'ProyectoWebApp/img/trabajador.png' %}" alt="Foto Trabajador" class="user-photo" width="50px" height="50px">
-          {% elif user.tipo_usuario == "Jefe" %}
-            <img src="{% static 'ProyectoWebApp/img/jefe.png' %}" alt="Foto Jefe" class="user-photo" width="50px" height="50px">
-          {% elif user.tipo_usuario == "Administrador" %}
-            <img src="{% static 'ProyectoWebApp/img/administrador.png' %}" alt="Foto Administrador" class="user-photo" width="50px" height="50px">
-          {% endif %}
-          <span class="nav-link user-greeting" style="color: white;">Hola {{ user.username }}</span>
-        </li>
-        
-        <li class="nav-item">
-          <a id="inbox" class="nav-link" href="{% url 'cerrar_sesion' %}" >
-            <ion-icon name="person-circle-outline"></ion-icon>
-            <span>Cerrar Sesión</span>
-          </a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a id="inbox" class="nav-link" href="{% url 'logear' %}">
-            <ion-icon name="person-circle-outline"></ion-icon>
-            <span>Iniciar sesión</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'Autenticacion' %}">
-            <ion-icon name="person-add-outline"></ion-icon>
-            <span>Registrarse</span>
-          </a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'Solicitudes_Epps' %}">
-            <ion-icon name="clipboard-outline"></ion-icon>
-            <span>Solicitud de Epps</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'Solicitudes_Tolva' %}">
-            <ion-icon name="clipboard-outline"></ion-icon>
-            <span>Solicitud de Tolva</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'Solicitudes_Retiro' %}">
-            <ion-icon name="clipboard-outline"></ion-icon>
-            <span>Solicitud de Retiro</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'exportar_solicitudes_excel' %}">
-            <ion-icon name="arrow-redo-outline"></ion-icon>
-            <span>Exportar Solicitudes a Excel</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'capsulas' %}">
-            <ion-icon name="videocam-outline"></ion-icon>
-            <span>Cápsulas Interactivas</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'Contacto' %}">
-            <ion-icon name="mail-outline"></ion-icon>
-            <span>Contacto</span>
-          </a>
-        </li>
-        <li class="nav-item ml">
-          <a class="nav-link" data-bs-toggle="modal" data-bs-target="#terminosModal" style="cursor: pointer;">
-            <ion-icon name="document-text-outline"></ion-icon>
-            <span>Términos y Condiciones</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+          <!-- Always show login and register links -->
 
+          <span class="nav-link user-greeting" style="color: white;">Hola, bienvenido {{ user.username }}</span>
+          <li class="nav-item">
+              <a id="inbox" class="nav-link" href="{% url 'logear' %}">
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                  <span>Iniciar sesión</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'Autenticacion' %}">
+                  <ion-icon name="person-add-outline"></ion-icon>
+                  <span>Registrarse</span>
+              </a>
+          </li>
+  
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+                  {% if user.tipo_usuario == "Administrador Informático" %}
+                      <img src="{% static 'ProyectoWebApp/img/administrador.png' %}" alt="Foto Administrador" class="user-photo" width="50px" height="50px">
+                      <a class="nav-link" href="{% url 'admin:index' %}">
+                          <span>Panel Admin TI</span>
+                      </a>
+                  {% elif user.tipo_usuario == "Jefe" %}
+                      <img src="{% static 'ProyectoWebApp/img/jefe.png' %}" alt="Foto Jefe" class="user-photo" width="50px" height="50px">
+                      <a class="nav-link" href="{% url 'panel_jefe' %}">
+                          <span>Panel Jefe</span>
+                      </a>
+                  {% elif user.tipo_usuario == "Trabajador" %}
+                      <img src="{% static 'ProyectoWebApp/img/trabajador.png' %}" alt="Foto Trabajador" class="user-photo" width="50px" height="50px">
+                      <a class="nav-link" href="{% url 'panel_trabajador' %}">
+                          <span>Panel Trabajador</span>
+                      </a>
+                  {% else %}
+                  <img src="{% static 'ProyectoWebApp/img/trabajador.png' %}" alt="Foto Trabajador" class="user-photo" width="50px" height="50px">
+                  <a class="nav-link" href="{% url 'panel_administrativo_operacional' %}">
+                      <span>Panel Administrativo</span>
+                  </a>
+                  {% endif %}
+                  
+                 
+              </li>
+  
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'perfil' %}">
+                      <ion-icon name="person-outline"></ion-icon>
+                      <span>Mi Perfil</span>
+                  </a>
+              </li>
+  
+              <li class="nav-item">
+                  <a id="inbox" class="nav-link" href="{% url 'cerrar_sesion' %}">
+                      <ion-icon name="log-out-outline"></ion-icon>
+                      <span>Cerrar Sesión</span>
+                  </a>
+              </li>
+  
+              <!-- Links visible to all authenticated users -->
+              <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="modal" data-bs-target="#terminosModal" style="cursor: pointer;">
+                      <ion-icon name="document-text-outline"></ion-icon>
+                      <span>Términos y Condiciones</span>
+                  </a>
+              </li>
+  
+              <!-- Contact link visible only for Jefe and Trabajador -->
+              {% if user.tipo_usuario == "Jefe" or user.tipo_usuario == "Trabajador" %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'Contacto' %}">
+                          <ion-icon name="mail-outline"></ion-icon>
+                          <span>Contacto</span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'exportar_solicitudes_excel' %}">
+                        <ion-icon name="document-outline"></ion-icon> <!-- Cambiado a un ícono de documento -->
+                        <span>Exportar a Excel</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'capsulas' %}">
+                      <ion-icon name="videocam-outline"></ion-icon>
+                      <span>Cápsulas Interactivas</span>
+                    </a>
+                  </li>
+                
+              {% endif %}
+  
+              <!-- Only show solicitudes links for Jefe and Trabajador -->
+              {% if user.tipo_usuario == "Jefe" or user.tipo_usuario == "Trabajador" %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'Solicitudes_Epps' %}">
+                          <ion-icon name="clipboard-outline"></ion-icon>
+                          <span>Solicitud de Epps</span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'Solicitudes_Tolva' %}">
+                          <ion-icon name="clipboard-outline"></ion-icon>
+                          <span>Solicitud de Tolva</span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'Solicitudes_Retiro' %}">
+                          <ion-icon name="clipboard-outline"></ion-icon>
+                          <span>Solicitud de Retiro</span>
+                      </a>
+                  </li>
+              {% endif %}
+          {% endif %}
+      </ul>
+  </nav>
+  
     <!-- Enlace para abrir el modal -->
 
     <div>
@@ -166,8 +202,23 @@
             </div>
         </footer>
     </div>
-
 </div>
+
+<!--FUE MODIFICADO PARA VER A LOS USUARIOS EN LINEA X-------------------X -->
+<div class="usuarios-conectados" style="position: fixed; top: 180px; right: 10px; background-color: white; padding: 10px; border-radius: 5px;">
+  <h3>Trabajadores en Línea</h3>
+  <ul id="lista-usuarios">
+    {% for usuario in usuarios_conectados %}
+      <li>
+        <span class="punto-verde"></span> <!-- Aquí puedes agregar un estilo CSS para el punto verde -->
+        {{ usuario.username }} ({{ usuario.tipo_usuario }})
+      </li>
+    {% empty %}
+      <li>No hay usuarios conectados.</li>
+    {% endfor %}
+  </ul>
+</div>
+
 
   <section class="cmr-section">
     <div class="container mt-5">

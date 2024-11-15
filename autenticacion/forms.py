@@ -1,4 +1,3 @@
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Usuario_Registro
@@ -39,7 +38,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 class CustomUserCreationForm(UserCreationForm):
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput)
-    rut = forms.CharField(label="Ingrese su RUT", max_length=12)
+    rut = forms.CharField(label="Ingrese su RUT (XXXXXXXX-X)", max_length=12)
 
     class Meta(UserCreationForm.Meta):
         model = Usuario_Registro

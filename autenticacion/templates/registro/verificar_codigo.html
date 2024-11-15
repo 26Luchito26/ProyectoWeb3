@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Email</title>
+    <link rel="stylesheet" href="{% static 'ProyectoWebApp/css/Verificacion.css' %}">
+</head>
+<body>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="codigo">Código de Verificación de Email:</label>
+        <input type="text" name="codigo" required>
+        <button type="submit">Verificar</button>
+    </form>
+    
+</body>
+</html>
+
+

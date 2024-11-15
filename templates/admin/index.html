@@ -1,0 +1,92 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .dashboard-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .dashboard-card h3 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+    }
+
+    .model-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .model-list li {
+        margin: 10px 0;
+    }
+
+    .model-list a {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+    .model-list a:hover {
+        background: rgba(230, 0, 18, 0.1);
+        color: var(--primary-color);
+    }
+
+    .stats-container {
+        margin-top: 20px;
+        padding: 20px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: white;
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    {% for app in app_list %}
+    <div class="dashboard-card">
+        <h3>
+            <i class="fas fa-folder"></i>
+            {{ app.name }}
+        </h3>
+        <ul class="model-list">
+            {% for model in app.models %}
+            <li>
+                {% if model.admin_url %}
+                <a href="{{ model.admin_url }}">
+                    <i class="fas fa-database me-2"></i>
+                    {{ model.name }}
+                </a>
+                {% else %}
+                {{ model.name }}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

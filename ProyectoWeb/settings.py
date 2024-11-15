@@ -16,6 +16,9 @@ import dj_database_url
 
 from django.contrib.messages import constants as mensajes_de_error
 
+from cryptography.fernet import Fernet
+
+
 # Construye las rutas dentro del proyecto de esta manera: BASE_DIR / 'subdirectorio'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
     'solicitudes',
     'contacto',
     'autenticacion',
+    'perfil',
 ]
    
 
@@ -54,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'ProyectoWeb.urls'
@@ -61,7 +66,7 @@ ROOT_URLCONF = 'ProyectoWeb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,9 +115,14 @@ TIME_ZONE = 'America/Punta_Arenas'
 USE_I18N = True
 USE_TZ = True
 
+
 # Archivos estáticos (CSS, JavaScript, imágenes)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, '/static'), )
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'ProyectoWebApp/static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Archivos multimedia
 MEDIA_URL = '/media/'
@@ -138,3 +148,5 @@ MESSAGE_TAGS={
 }
 
 AUTH_USER_MODEL = 'autenticacion.Usuario_Registro'
+
+ENCRYPTION_KEY = Fernet.generate_key()

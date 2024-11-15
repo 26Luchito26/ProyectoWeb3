@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita el scroll horizontal */
+}
+
+.h-100 .gradient-form{
+    z-index: 4;
+}
+
+.gradient-form {
+    margin: 0;
+    padding: 0;
+}
+
+.gradient-custom-2 {
+    background: #fccb90; /* Fallback para navegadores que no soportan gradientes */
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ee2424, #ed0808, #5869d3, hsl(213, 88%, 62%)); /* Estándar W3C */
+
+    /* Añade los siguientes estilos si es necesario para ajustar la apariencia */
+    /* border-top-right-radius: .3rem; */
+    /* border-bottom-right-radius: .3rem; */
+}
+
+
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/static/ProyectoWebApp/img/coca1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    z-index: -4;
+  }
+  
+
+.capa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(130deg, #df2b34, #fb4c4c);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.card.rounded-3.text-black {
+    background-color: #ffffff;
+    padding: 20px 30px 20px 20px; /* Ajusta el padding según necesites */
+    z-index: 5; /* Asegúrate de que el formulario tenga un z-index mayor */
+}
+
+.btn.btn-success.gradient-custom-2 {
+    border: none; /* Elimina el borde si lo hubiera */
+    box-shadow: none; /* Elimina la sombra si la hubiera */
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        min-height: 100vh; /* Ajusta la altura mínima del formulario para ocupar toda la pantalla */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 5; /* Asegúrate de que el formulario tenga un z-index mayor */
+    }
+
+    .card-body {
+        max-width: 100%; /* Ajusta el ancho máximo del contenido */
+    }
+}
+
+/* Estilos para el contenedor de logos */
+#bubblesContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2; /* Asegúrate de que esté por debajo del formulario */
+}
+
+/* Estilos para cada logo */
+.logo1, .logo2 {
+    position: absolute;
+    pointer-events: auto; /* Permite hacer clic a través de los logos */
+    background-size: contain;
+}
+
+.logo1 {
+    width: 120px; /* Tamaño del logo 1 */
+    height: 120px; /* Tamaño del logo 1 */
+    background-image: url('/static/ProyectoWebApp/img/pelotac.png'); /* Imagen del logo 1 */
+    transform: rotate(40deg); /* Rotación inicial */
+}
+
+.logo2 {
+    width: 140px; /* Tamaño del logo 2 */
+    height: 140px; /* Tamaño del logo 2 */
+    background-image: url('/static/ProyectoWebApp/img/pelotar.png'); /* Imagen del logo 2 */
+    transform: rotate(-20deg); /* Rotación inicial */
+}
+
+/* Animación de los logos */
+@keyframes logoAnimation {
+    0% {
+        transform: translateY(110%) rotate(40deg); /* Inicia desde abajo con rotación */
+    }
+    90% {
+        transform: translateY(-10%) rotate(40deg); /* Termina antes de llegar a la parte superior */
+        opacity: 1; /* Mantiene la opacidad antes de desvanecerse */
+    }
+    100% {
+        transform: translateY(-20%) rotate(40deg); /* Desplaza un poco más hacia arriba para desaparecer */
+        opacity: 0; /* Desvanece el logo al final */
+    }
+}
+
+/*------------------> Responsive*/
+@media (max-height: 660px) {
+    .barra-lateral .nombre-pagina {
+        margin-bottom: 5px;
+    }
+
+    .barra-lateral .modo-oscuro {
+        margin-bottom: 3px;
+    }
+}
+
+@media (max-width: 600px) {
+    .barra-lateral {
+        position: fixed;
+        left: -250px;
+    }
+
+    .max-barra-lateral {
+        left: 0;
+    }
+
+    .menu {
+        display: flex;
+    }
+
+    .menu ion-icon:nth-child(2) {
+        display: none;
+    }
+
+    main {
+        margin-left: 0;
+    }
+
+    main.min-main {
+        margin-left: 0;
+    }
+}

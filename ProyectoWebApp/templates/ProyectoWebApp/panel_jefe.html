@@ -1,0 +1,217 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Jefe</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<style>
+
+    body{
+
+    background-image: url("/static/ProyectoWebApp/img/coca1.jpg");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+
+    /* Estilos generales para el contenedor de los paneles */
+    .panel-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+
+    }
+
+    /* Estilos para cada panel */
+    .panel {
+
+    border: 1px solid #e0e0e0; /* Borde gris */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px;
+    width: 48%; /* Ajusta el ancho según sea necesario */
+    transition: transform 0.2s; /* Efecto al pasar el ratón */
+    }
+
+    /* Efecto al pasar el ratón sobre el panel */
+    .panel:hover {
+    transform: scale(1.02); /* Aumenta ligeramente el tamaño */
+    }
+
+    /* Títulos de los paneles */
+    .panel h2 {
+    color: #e60000; /* Color rojo Coca-Cola */
+    font-size: 24px;
+    margin-bottom: 15px; /* Espaciado debajo del título */
+    }
+
+    /* Estilo para botones en los paneles */
+    .panel .btn {
+    margin-top: 10px; /* Espacio encima de los botones */
+    background-color: #e60000; /* Color rojo Coca-Cola */
+    color: #ffffff; /* Texto blanco */
+    border: none; /* Sin borde */
+    }
+
+    /* Cambiar color del botón al pasar el ratón */
+    .panel .btn:hover {
+    background-color: #c70000; /* Un rojo más oscuro al pasar el ratón */
+    }
+
+    /* Alertas */
+    .alert {
+    margin-top: 15px; /* Espaciado superior */
+    }
+
+    /* Estilos para formularios dentro de los paneles */
+    .panel form {
+    margin-top: 20px; /* Espacio superior en formularios */
+    }
+
+    /* Ajustes para campos de formulario */
+    .panel .form-control {
+    margin-bottom: 15px; /* Espaciado entre campos de formulario */
+    }
+
+
+    /* Medios */
+    @media (max-width: 768px) {
+    .panel-container {
+        flex-direction: column; /* Apilar los paneles en pantallas más pequeñas */
+    }
+
+    .panel {
+        width: 100%; /* Ancho completo para cada panel */
+        margin-bottom: 20px; /* Espacio entre paneles */
+    }
+    }
+
+    th, td{
+        color: white;
+        background-color: rgba(0, 0, 0, 0.461);
+    }
+
+
+</style>
+
+
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Panel Jefe</h1>
+        <!-- Tabla para solicitudes de EPPs -->
+        <h2>Solicitudes de EPPs</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Usuario</th>
+                    <th>Tipo de Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in solicitudes_epps %}
+                <tr>
+                    <td>{{ solicitud.nombreEpps }}</td>
+                    <td>{{ solicitud.descripcionEpps }}</td>
+                    <td>{{ solicitud.id_usuario.username }}</td>
+                    <td>{{ solicitud.tipo_usuario }}</td>
+                    <td>
+                        <a href="{% url 'editar_solicitud' solicitud.id_solicitudEpps 'epps' %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'eliminar_solicitud' solicitud.id_solicitudEpps 'epps' %}" class="btn btn-danger" 
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No hay solicitudes de EPPs.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Tabla para solicitudes de Retiro -->
+        <h2>Solicitudes de Retiro</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Usuario</th>
+                    <th>Tipo de Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in solicitudes_retiro %}
+                <tr>
+                    <td>{{ solicitud.nombre_retiro }}</td>
+                    <td>{{ solicitud.descripcionRetiro }}</td>
+                    <td>{{ solicitud.id_usuario.username }}</td>
+                    <td>{{ solicitud.tipo_usuario }}</td>
+                    <td>
+                        <a href="{% url 'editar_solicitud' solicitud.id_solicitudRetiro 'retiro' %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'eliminar_solicitud' solicitud.id_solicitudRetiro 'retiro' %}" class="btn btn-danger" 
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No hay solicitudes de Retiro.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Tabla para solicitudes de Tolva -->
+        <h2>Solicitudes de Tolva</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Usuario</th>
+                    <th>Tipo de Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in solicitudes_tolva %}
+                <tr>
+                    <td>{{ solicitud.nombre_tolva }}</td>
+                    <td>{{ solicitud.descripcionTolva }}</td>
+                    <td>{{ solicitud.id_usuario.username }}</td>
+                    <td>{{ solicitud.tipo_usuario }}</td>
+                    <td>
+                        <a href="{% url 'editar_solicitud' solicitud.id_solicitudTolva 'tolva' %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'eliminar_solicitud' solicitud.id_solicitudTolva 'tolva' %}" class="btn btn-danger" 
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No hay solicitudes de Tolva.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

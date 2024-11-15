@@ -1,7 +1,11 @@
 from django import forms
-from .models import Solicitudes_Epps, Solicitudes_Retiro, Solicitudes_Tolva
+from .models import Solicitudes_Epps, Solicitudes_Retiro, Solicitudes_Tolva # Asegúrate de importar tu modelo de usuario
+
+
 
 class SolicitudEppsForm(forms.ModelForm):
+
+
     class Meta:
         model = Solicitudes_Epps
         fields = ['nombreEpps', 'fecha_realizarEP', 'descripcionEpps', 'tipo_materialEpps']
@@ -10,6 +14,8 @@ class SolicitudEppsForm(forms.ModelForm):
         }
 
 class SolicitudRetiroForm(forms.ModelForm):
+
+
     class Meta:
         model = Solicitudes_Retiro
         fields = ['nombre_retiro', 'fecha_realizarR', 'descripcionRetiro', 'cantidadRetiro', 'tipo_materialRetiro', 'patente']
@@ -18,6 +24,8 @@ class SolicitudRetiroForm(forms.ModelForm):
         }
 
 class SolicitudTolvaForm(forms.ModelForm):
+ 
+
     class Meta:
         model = Solicitudes_Tolva
         fields = ['nombre_tolva', 'fecha_realizarT', 'descripcionTolva', 'tipo_retiro_pedido']

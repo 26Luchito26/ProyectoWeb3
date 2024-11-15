@@ -1,0 +1,162 @@
+{% extends 'ProyectoWebApp/base_perfil.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contenedor_principal">
+    <div class="contenido_principal">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h2 class="text-coca">Mi Perfil en Coca-Cola Andina</h2>
+            </div>
+            
+            <div class="profile-content">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-image-container">
+                            <img src="{{ perfil.imagen.url }}" class="profile-image" alt="Foto de perfil">
+                            <div class="profile-info">
+                                <h3 class="user-name">{{ user.get_full_name }}</h3>
+                                <span class="user-type">{{ user.tipo_usuario }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <form method="POST" enctype="multipart/form-data" class="profile-form">
+                            {% csrf_token %}
+                            
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} fade show">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <div class="form-sections">
+                                <div class="form-section">
+                                    <h4>Información Personal</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><ion-icon name="person-outline"></ion-icon> Nombre de usuario</label>
+                                                {{ form.username }}
+                                            </div>
+                                            <div class="form-group">
+                                                <label><ion-icon name="text-outline"></ion-icon> Nombre</label>
+                                                {{ form.first_name }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><ion-icon name="card-outline"></ion-icon> RUT</label>
+                                                {{ form.rut }}
+                                            </div>
+                                            <div class="form-group">
+                                                <label><ion-icon name="mail-outline"></ion-icon> Email</label>
+                                                {{ form.email }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>Información Laboral</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><ion-icon name="briefcase-outline"></ion-icon> Cargo</label>
+                                                {{ form.cargo }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><ion-icon name="business-outline"></ion-icon> Departamento</label>
+                                                {{ form.departamento }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>Contacto</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><ion-icon name="call-outline"></ion-icon> Teléfono</label>
+                                                {{ form.telefono }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><ion-icon name="location-outline"></ion-icon> Dirección</label>
+                                                {{ form.direccion }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section emergency-contact">
+                                    <h4>
+                                        <ion-icon name="alert-circle-outline"></ion-icon>
+                                        Contacto de Emergencia
+                                    </h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <ion-icon name="person-outline"></ion-icon>
+                                                    Nombre del Contacto
+                                                </label>
+                                                {{ form.emergencia_nombre }}
+                                            </div>
+                                            <div class="form-group">
+                                                <label>
+                                                    <ion-icon name="people-outline"></ion-icon>
+                                                    Parentesco
+                                                </label>
+                                                {{ form.emergencia_parentesco }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <ion-icon name="call-outline"></ion-icon>
+                                                    Teléfono de Emergencia
+                                                </label>
+                                                {{ form.emergencia_telefono }}
+                                            </div>
+                                            <div class="form-group">
+                                                <label>
+                                                    <ion-icon name="location-outline"></ion-icon>
+                                                    Dirección del Contacto
+                                                </label>
+                                                {{ form.emergencia_direccion }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>Imagen de Perfil</h4>
+                                    <div class="form-group">
+                                        <label><ion-icon name="image-outline"></ion-icon> Cambiar imagen</label>
+                                        {{ form.imagen }}
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-coca">
+                                        <ion-icon name="save-outline"></ion-icon>
+                                        Guardar Cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

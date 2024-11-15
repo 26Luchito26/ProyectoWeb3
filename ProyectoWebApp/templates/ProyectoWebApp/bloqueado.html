@@ -1,80 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  {% load static %}
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Registrarse{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'ProyectoWebApp/css/bloqueado.css' %}">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<html lang="es">
 
-  {% block extra_css %}{% endblock %}
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Bloqueado</title>
+    <!-- Enlazando el archivo CSS -->
+    <link rel="stylesheet" href="{% static 'ProyectoWebApp/css/bloqueado.css' %}">
 </head>
 <body>
-  <div class="background-image"></div>
-
-  <div id="bubblesContainer"></div>
-
-  <div class="logo-empresa">
-    <img src="{% static 'ProyectoWebApp/img/logo.png' %}" alt="Logo de la empresa" width="200px" height="180px">
-  </div>
-
-  <div class="contenedor_principal">
-    <div class="contenido_principal">
-      {% if not user.is_authenticated %}
-        <div class="message">
-          <h1>Debes registrarte e iniciar sesión para realizar y exportar solicitudes.</h1>
-        </div>
-      {% endif %}
-      {% block content %}
-      {% endblock %}
-    </div>
-  </div>
- 
-  <div class="capa"></div>
+    <div class="background-image"></div>
+    <div class="capa"></div>
   
-
-  <script>
-    $(document).ready(function() {
-      var backgrounds = [
-        "{% static 'ProyectoWebApp/img/coca1.jpg' %}",
-        "{% static 'ProyectoWebApp/img/coca2.jpg' %}",
-        "{% static 'ProyectoWebApp/img/coca3.jpg' %}"
-      ];
-      var currentIndex = 0;
     
-      // Función para establecer la primera imagen de fondo al cargar la página
-      function setInitialBackground() {
-        $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
-      }
-    
-      // Llamar a la función para establecer la primera imagen de fondo inmediatamente
-      setInitialBackground();
-    
-      // Función para cambiar la imagen de fondo automáticamente
-      function changeBackground() {
-        currentIndex = (currentIndex + 1) % backgrounds.length;
-        $('.background-image').css('background-image', 'url(' + backgrounds[currentIndex] + ')');
-      }
-    
-      // Cambiar imagen cada 10 segundos
-      setInterval(changeBackground, 10000); // 10000 milisegundos = 10 segundos
-    });
-    
-    </script>
-    
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="{% static 'ProyectoWebApp/js/modo_oscuro.js' %}"></script>
-    <script src="{% static 'ProyectoWebApp/js/animacion_objetos.js' %}"></script>
-    
-    <!-- JavaScript de Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js" integrity="sha384-U5l6FJxBV7NpfCrv1WBmpQVZbIZHzoI5/9r2E+NkSc4+qjQ6PLHYM0dI2S45fdW3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
+    <h1>Acceso Denegado</h1>
+    <p>Lo sentimos, pero el acceso a esta aplicación no está permitido desde dispositivos móviles.</p>
 </body>
 </html>

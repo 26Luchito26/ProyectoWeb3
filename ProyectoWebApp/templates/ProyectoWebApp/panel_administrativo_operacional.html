@@ -1,0 +1,161 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo Operacional</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<style>
+
+    body{
+
+    background-image: url("/static/ProyectoWebApp/img/coca1.jpg");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+
+    /* Estilos generales para el contenedor de los paneles */
+    .panel-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+
+    }
+
+    /* Estilos para cada panel */
+    .panel {
+
+    border: 1px solid #e0e0e0; /* Borde gris */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px;
+    width: 48%; /* Ajusta el ancho según sea necesario */
+    transition: transform 0.2s; /* Efecto al pasar el ratón */
+    }
+
+    /* Efecto al pasar el ratón sobre el panel */
+    .panel:hover {
+    transform: scale(1.02); /* Aumenta ligeramente el tamaño */
+    }
+
+    /* Títulos de los paneles */
+    .panel h2 {
+    color: #e60000; /* Color rojo Coca-Cola */
+    font-size: 24px;
+    margin-bottom: 15px; /* Espaciado debajo del título */
+    }
+
+    /* Estilo para botones en los paneles */
+    .panel .btn {
+    margin-top: 10px; /* Espacio encima de los botones */
+    background-color: #e60000; /* Color rojo Coca-Cola */
+    color: #ffffff; /* Texto blanco */
+    border: none; /* Sin borde */
+    }
+
+    /* Cambiar color del botón al pasar el ratón */
+    .panel .btn:hover {
+    background-color: #c70000; /* Un rojo más oscuro al pasar el ratón */
+    }
+
+    /* Alertas */
+    .alert {
+    margin-top: 15px; /* Espaciado superior */
+    }
+
+    /* Estilos para formularios dentro de los paneles */
+    .panel form {
+    margin-top: 20px; /* Espacio superior en formularios */
+    }
+
+    /* Ajustes para campos de formulario */
+    .panel .form-control {
+    margin-bottom: 15px; /* Espaciado entre campos de formulario */
+    }
+
+
+    /* Medios */
+    @media (max-width: 768px) {
+    .panel-container {
+        flex-direction: column; /* Apilar los paneles en pantallas más pequeñas */
+    }
+
+    .panel {
+        width: 100%; /* Ancho completo para cada panel */
+        margin-bottom: 20px; /* Espacio entre paneles */
+    }
+    }
+
+    th, td{
+        color: white;
+        background-color: rgba(0, 0, 0, 0.461);
+    }
+
+
+</style>
+
+
+<div class="container mt-5">
+    <h1>Panel Administrativo Operacional</h1>
+    <h2> Control Operacional</h2>
+
+    <!-- Solicitudes EPPs -->
+    <div class="panel-section">
+        <h2>Solicitudes EPPs</h2>
+        <h3>Solicitudes recientes (últimas 10 solicitudes)</h3>
+        <ul class="list-group">
+            {% for solicitud in solicitudes_epps_recientes|slice:":10" %}
+                <li class="list-group-item">{{ solicitud.nombreEpps }} - {{ solicitud.descripcionEpps }} - {{ solicitud.fecha_realizarEP }} -  {{solicitud.tipo_de_usuario}}  {{solicitud.id_usuario}}</li>
+            {% empty %}
+                <li class="list-group-item empty-message">No hay solicitudes recientes de EPPs.</li>
+            {% endfor %}
+        </ul>
+
+        
+    </div>
+
+    <!-- Solicitudes Retiro -->
+    <div class="panel-section">
+        <h2>Solicitudes Retiro</h2>
+        <h3>Solicitudes recientes (últimas 10 solicitudes)</h3>
+        <ul class="list-group">
+            {% for solicitud in solicitudes_retiro_recientes|slice:":10" %}
+                <li class="list-group-item">{{ solicitud.nombre_retiro }} - {{ solicitud.descripcionRetiro }} - {{ solicitud.fecha_realizarR }} - {{solicitud.tipo_de_usuario}}  {{solicitud.id_usuario}}</li>
+            {% empty %}
+                <li class="list-group-item empty-message">No hay solicitudes recientes de retiro.</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <!-- Solicitudes Tolva -->
+    <div class="panel-section">
+        <h2>Solicitudes Tolva</h2>
+        <h3>Solicitudes recientes (últimas 10 solicitudes)</h3>
+        <ul class="list-group">
+            {% for solicitud in solicitudes_tolva_recientes|slice:":10" %}
+                <li class="list-group-item">{{ solicitud.nombre_tolva }} - {{ solicitud.descripcionTolva }}  - {{ solicitud.fecha_realizarT }} - {{solicitud.tipo_de_usuario}}  {{solicitud.id_usuario}}</li>
+            {% empty %}
+                <li class="list-group-item empty-message">No hay solicitudes recientes de tolva.</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

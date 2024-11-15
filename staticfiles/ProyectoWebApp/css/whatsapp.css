@@ -1,0 +1,18 @@
+.whatsapp-container {
+    position: fixed;
+    top: 700px; /* Ajusta según sea necesario */
+    right: 10px;
+    display: flex;
+    align-items: center;
+    z-index: 3;
+  }
+  
+  .whatsapp-text {
+    margin-top: 10px; /* Ajusta según sea necesario */
+    color: white; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Peso de la fuente */
+    font-family: 'Roboto', sans-serif;
+    z-index: 3;
+  }
+  
